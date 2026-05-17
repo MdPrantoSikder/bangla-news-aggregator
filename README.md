@@ -1,4 +1,4 @@
-# Bangla News Aggregator with AI Summarization
+# Bangla News Aggregator with AI Summarization.
 
 A web application that aggregates news from major Bangladeshi news sources,
 uses AI to detect when multiple sites cover the same story, and generates
