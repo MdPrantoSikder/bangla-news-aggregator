@@ -26,10 +26,10 @@ Bangladeshi readers who follow news daily — including BCS, bank job, and other
 
 This app:
 
-- **Scrapes** 5+ Bangladeshi news sites every 30 minutes
-- **Deduplicates** stories using sentence-transformer embeddings — when 4 sites cover the same event, it groups them as one story
-- **Summarizes** each story in Bangla AND English using the Gemini API
-- **Serves** a clean unified feed via a REST API and React frontend
+- **Scrapes** 5+ Bangladeshi news sites every 30 minutes.
+- **Deduplicates** stories using sentence-transformer embeddings — when 4 sites cover the same event, it groups them as one story.
+- **Summarizes** each story in Bangla AND English using the Gemini API.
+- **Serves** a clean unified feed via a REST API and React frontend.
 
 ## Key Features
 
