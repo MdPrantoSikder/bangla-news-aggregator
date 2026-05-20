@@ -33,15 +33,15 @@ This app:
 
 ## Key Features
 
-- Multi-source scraping (Daily Star, Prothom Alo, BDNews24, Jugantor, Kaler Kantho)
+- Multi-source scraping (Daily Star, Prothom Alo, BDNews24, Jugantor, Kaler Kantho).
 - Semantic deduplication using `paraphrase-multilingual-MiniLM-L12-v2`
-- Bilingual AI summaries (Gemini API)
-- Hybrid search — keyword + semantic
-- REST API with auto-generated OpenAPI docs
-- Layered architecture (routers → services → repositories → models)
-- Idempotent scrapers — safe to re-run any number of times
-- Background jobs via Celery for scheduled scraping
-- Redis cache layer to control LLM costs
+- Bilingual AI summaries (Gemini API).
+- Hybrid search — keyword + semantic.
+- REST API with auto-generated OpenAPI docs.
+- Layered architecture (routers → services → repositories → models).
+- Idempotent scrapers — safe to re-run any number of times.
+- Background jobs via Celery for scheduled scraping.
+- Redis cache layer to control LLM costs.
 
 ## Tech Stack
 
