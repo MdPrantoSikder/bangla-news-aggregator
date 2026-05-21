@@ -1,4 +1,4 @@
-# Bangla News Aggregator with AI Summarization
+# Bangla News Aggregator with AI Summarization.
 
 > One feed for all Bangladeshi news. Scrapes major BD news sites every 30 minutes, uses AI embeddings to detect when multiple sources cover the same story, and generates bilingual summaries in Bangla and English.
 
