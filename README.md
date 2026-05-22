@@ -58,6 +58,6 @@ This app:
 **Deployment** *(Phase 12)*
 - Backend: Render (Docker) · Frontend: Vercel
 - Database: Supabase (PostgreSQL) · Redis: Upstash
-- CI/CD: GitHub Actions · Monitoring: Sentry · Uptime: UptimeRobot
+- CI/CD: GitHub Actions · Monitoring: Sentry · Uptime: UptimeRobot.
 
 ## Architecture
