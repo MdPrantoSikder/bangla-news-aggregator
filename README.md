@@ -46,18 +46,18 @@ This app:
 ## Tech Stack
 
 **Backend**
-- Python 3.13 · FastAPI · Uvicorn
-- SQLAlchemy 2.0 · Alembic · PostgreSQL
-- Redis (Memurai locally, Upstash in production) · Celery
-- BeautifulSoup4 · Requests
-- sentence-transformers · Google Gemini API · Pydantic v2
+- Python 3.13 · FastAPI · Uvicorn.
+- SQLAlchemy 2.0 · Alembic · PostgreSQL.
+- Redis (Memurai locally, Upstash in production) · Celery.
+- BeautifulSoup4 · Requests.
+- sentence-transformers · Google Gemini API · Pydantic v2.
 
 **Frontend** *(Phase 10+)*
-- React 18 (Vite) · Tailwind CSS · Axios · React Router
+- React 18 (Vite) · Tailwind CSS · Axios · React Router.
 
 **Deployment** *(Phase 12)*
-- Backend: Render (Docker) · Frontend: Vercel
-- Database: Supabase (PostgreSQL) · Redis: Upstash
+- Backend: Render (Docker) · Frontend: Vercel.
+- Database: Supabase (PostgreSQL) · Redis: Upstash.
 - CI/CD: GitHub Actions · Monitoring: Sentry · Uptime: UptimeRobot.
 
 ## Architecture
