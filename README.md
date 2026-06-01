@@ -133,7 +133,7 @@ out of the HTTP layer and database access out of the business logic.
 | **Repositories** | All database reads/writes | `ArticleRepository.get_recent()` |
 | **Models** | SQLAlchemy ORM tables + relationships | `Article`, `Story`, `User`, `Bookmark` |
 
-### Data Flow (Scrape → Serve).
+### Data Flow (Scrape → Serve)
 
 1. **Schedule** — Celery Beat fires every 30 minutes and dispatches scrape tasks to the worker.
 2. **Scrape** — The worker fetches and parses each source with BeautifulSoup4. Scrapers are **idempotent**: duplicate articles (by URL) are skipped, so re-runs are safe.
@@ -144,6 +144,6 @@ out of the HTTP layer and database access out of the business logic.
 7. **Serve** — FastAPI exposes a unified feed and hybrid search (keyword + semantic) over a REST API with auto-generated OpenAPI docs.
 8. **Render** — The React frontend consumes the API and presents the clean, bilingual feed.
 
-### Why Redis Sits in Two Places.
+### Why Redis Sits in Two Places
 
 Redis plays **two distinct roles**: it's the **Celery message broker** for background scraping jobs, and it's the **cache layer** that stores generated summaries and hot query results so the same LLM call never runs twice.
