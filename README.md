@@ -61,3 +61,89 @@ This app:
 - CI/CD: GitHub Actions · Monitoring: Sentry · Uptime: UptimeRobot.
 
 ## Architecture
+
+
+### System Overview
+
+```mermaid
+flowchart TB
+    subgraph SOURCES["📰 News Sources"]
+        direction LR
+        N1[Daily Star]
+        N2[Prothom Alo]
+        N3[Jugantor]
+        N4[Business Standard]
+        N5["BDNews24 (deferred — Cloudflare)"]
+    end
+
+    subgraph INGEST["⚙️ Ingestion Layer"]
+        direction TB
+        BEAT["Celery Beat(dispatches every 30 min)"]
+        WORKER["Celery Worker(BeautifulSoup4 + Requests)"]
+        BEAT --> WORKER
+    end
+
+    subgraph PROCESS["🧠 Processing Pipeline"]
+        direction TB
+        EMB["Embeddingsparaphrase-multilingual-MiniLM-L12-v2 (384-dim)"]
+        DEDUP["Semantic Dedup / Clusteringcosine ≥ 0.92 + category filter"]
+        SUM["Bilingual SummariesGemini API (Bangla + English)"]
+        EMB --> DEDUP --> SUM
+    end
+
+    subgraph STORE["💾 Storage"]
+        direction LR
+        PG[("PostgreSQLarticles · stories · users · bookmarks")]
+        REDIS[("Redis / Memuraibroker + cache")]
+    end
+
+    subgraph API["🚀 API Layer — FastAPI (layered)"]
+        direction TB
+        ROUTERS["Routers/articles · /search · /auth · /bookmarks · /admin"]
+        SERVICES["Services(business logic)"]
+        REPOS["Repositories(DB access)"]
+        MODELS["Models(SQLAlchemy 2.0)"]
+        ROUTERS --> SERVICES --> REPOS --> MODELS
+    end
+
+    subgraph CLIENT["💻 Frontend"]
+        REACT["React 18 + ViteTailwind · Axios · React Router"]
+    end
+
+    SOURCES --> WORKER
+    WORKER --> PG
+    WORKER --> EMB
+    SUM --> PG
+    INGEST  REDIS
+    API  PG
+    API  REDIS
+    REACT -->|REST / JSON| ROUTERS
+```
+
+### Layered Backend
+
+The backend follows a strict **routers → services → repositories → models** flow.
+Each layer only talks to the one directly beneath it, which keeps business logic
+out of the HTTP layer and database access out of the business logic.
+
+| Layer | Responsibility | Example |
+|-------|----------------|---------|
+| **Routers** | HTTP endpoints, request/response validation (Pydantic v2), auth guards | `GET /articles`, `POST /auth/login` |
+| **Services** | Business logic, orchestration, LLM/embedding calls | dedup grouping, summary generation, search ranking |
+| **Repositories** | All database reads/writes | `ArticleRepository.get_recent()` |
+| **Models** | SQLAlchemy ORM tables + relationships | `Article`, `Story`, `User`, `Bookmark` |
+
+### Data Flow (Scrape → Serve)
+
+1. **Schedule** — Celery Beat fires every 30 minutes and dispatches scrape tasks to the worker.
+2. **Scrape** — The worker fetches and parses each source with BeautifulSoup4. Scrapers are **idempotent**: duplicate articles (by URL) are skipped, so re-runs are safe.
+3. **Persist** — New articles are written to PostgreSQL.
+4. **Embed** — Each article is encoded into a 384-dim vector using the multilingual MiniLM model.
+5. **Deduplicate** — Articles above a **0.92 cosine threshold** (within the same category) are clustered into a single *story*, so one event reported by four sites becomes one entry.
+6. **Summarize** — Each story is summarized in **both Bangla and English** via the Gemini API. Results are cached in Redis to control LLM cost.
+7. **Serve** — FastAPI exposes a unified feed and hybrid search (keyword + semantic) over a REST API with auto-generated OpenAPI docs.
+8. **Render** — The React frontend consumes the API and presents the clean, bilingual feed.
+
+### Why Redis Sits in Two Places
+
+Redis plays **two distinct roles**: it's the **Celery message broker** for background scraping jobs, and it's the **cache layer** that stores generated summaries and hot query results so the same LLM call never runs twice.
