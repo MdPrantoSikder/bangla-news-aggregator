@@ -117,7 +117,7 @@ flowchart TB
     INGEST  REDIS
     API  PG
     API  REDIS
-    REACT -->|REST / JSON| ROUTERS
+    REACT -->|REST / JSON| ROUTERS.
 ```
 
 ### Layered Backend
