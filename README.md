@@ -103,7 +103,7 @@ flowchart TB
         SERVICES["Services(business logic)"]
         REPOS["Repositories(DB access)"]
         MODELS["Models(SQLAlchemy 2.0)"]
-        ROUTERS --> SERVICES --> REPOS --> MODELS
+        ROUTERS --> SERVICES --> REPOS --> MODELS.
     end
 
     subgraph CLIENT["💻 Frontend"]
