@@ -1,0 +1,32 @@
+﻿# Combined ignores for the whole project repo
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+.env
+*.log
+
+# JS
+node_modules/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime state
+groq_usage.json
+*.db
+*.sqlite3
+
+# Backup zips
+*.zip
+*.tar.gz
