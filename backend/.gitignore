@@ -1,0 +1,60 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+daily_brief.log
+uvicorn.log
+
+# Runtime state
+groq_usage.json
+*.db
+*.sqlite3
+
+# Test outputs
+test_*.py
+check_*.py
+add_*.py
+reset_*.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Alembic - keep migrations, ignore cache
+alembic/__pycache__/
+
+# HuggingFace cache (you set HF_HOME elsewhere)
+.cache/
+
+# Node from any subdir mistakes
+node_modules/
