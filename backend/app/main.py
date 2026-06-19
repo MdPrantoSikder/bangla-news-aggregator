@@ -1,22 +1,42 @@
-# Import the FastAPI class from the fastapi package.
-# This is the main building block we'll use to create our web app.
+﻿"""Main FastAPI app entry point."""
 from fastapi import FastAPI
-from app.routers import sources as sources_router
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.routers import sources  as sources_router
 from app.routers import articles as articles_router
-# Create an instance of the FastAPI class.
-# "app" is just a variable name — it could be anything, but "app" is the convention.
-# This object represents our web application.
-app = FastAPI()
+from app.routers import search   as search_router
+from app.routers import stories  as stories_router
+from app.routers import auth     as auth_router
+from app.routers import admin    as admin_router
+
+
+app = FastAPI(title="BanglaBrief API")
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+app.include_router(auth_router.router)
+app.include_router(admin_router.router)
 app.include_router(sources_router.router)
 app.include_router(articles_router.router)
-# This is a "decorator" — it tells FastAPI:
-# "When someone sends a GET request to the URL '/', run the function below."
-# The "/" is the root URL of your site (like http://localhost:8000/).
+app.include_router(search_router.router)
+app.include_router(stories_router.router)
+
+
 @app.get("/")
 def read_root():
-    # Whatever this function returns becomes the response sent to the user.
-    # FastAPI automatically converts this dictionary into JSON.
-    return {"message": "Hello, World! Bangla News Aggregator backend is alive."}
+    return {"message": "BanglaBrief backend is alive."}
+
 
 @app.get("/health")
 def health_check():

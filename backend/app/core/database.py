@@ -1,4 +1,4 @@
-# create_engine builds the connection to the database.
+﻿# create_engine builds the connection to the database.
 # It manages a pool of connections internally so multiple parts of your app
 # can talk to the database efficiently.
 from sqlalchemy import create_engine
@@ -12,9 +12,9 @@ from app.core.config import settings
 
 
 # The engine is the lowest-level connection to the database.
-# echo=True logs every SQL statement to the terminal — great for learning,
+# echo=False logs every SQL statement to the terminal â€” great for learning,
 # we'll turn it off later in production.
-engine = create_engine(settings.DATABASE_URL, echo=True)
+engine = create_engine(settings.DATABASE_URL, echo=False)
 
 
 # SessionLocal is a factory. Calling SessionLocal() gives you a new session.
