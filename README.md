@@ -53,7 +53,7 @@ This app:
 - sentence-transformers · Google Gemini API · Pydantic v2.
 
 **Frontend** *(Phase 10+)*
-- React 18 (Vite) · Tailwind CSS · Axios · React Router.
+- React 18 (Vite) , Tailwind CSS , Axios · React Router.
 
 **Deployment** *(Phase 12)*
 - Backend: Render (Docker) · Frontend: Vercel.
