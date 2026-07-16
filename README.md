@@ -33,7 +33,7 @@ This app:
 
 ## Key Features
 
-- Multi-source scraping (Daily Star, Prothom Alo, BDNews24,).
+- Multi-source scraping (Daily Star, Prothom Alo, business standard).
 - Semantic deduplication using `paraphrase-multilingual-MiniLM-L12-v2`.
 - Bilingual AI summaries (Gemini API).
 - Hybrid search — keyword + semantic.
