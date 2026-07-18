@@ -56,7 +56,7 @@ This app:
 - React 18 (Vite) , Tailwind CSS , Axios , React Router.
 
 **Deployment** *(Phase 12)*
-- Backend: Render (Docker) · Frontend: Vercel.
+- Backend: Render (Docker) , Frontend: Vercel.
 - Database: Supabase (PostgreSQL) · Redis: Upstash.
 - CI/CD: GitHub Actions · Monitoring: Sentry · Uptime: UptimeRobot.
 
